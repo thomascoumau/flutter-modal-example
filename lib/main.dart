@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modal_example/style/style.dart';
+import 'package:flutter_modal_example/widget/modals.dart';
+import 'package:flutter_modal_example/widget/scrollable_bottom_sheet.dart';
 import 'package:photo_view/photo_view.dart';
-import 'package:pocbottomsheet/style/style.dart';
-import 'package:pocbottomsheet/widget/modals.dart';
-import 'package:pocbottomsheet/widget/scrollable_bottom_sheet.dart';
 import 'package:sliding_sheet/sliding_sheet.dart';
 
 void main() => runApp(const MyApp());
