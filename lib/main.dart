@@ -52,52 +52,31 @@ class _HomeState extends State<Home> {
                         disableGestures: false,
                         imageProvider: const AssetImage("assets/Arves.jpg"),
                       ),
-                      Column(
-                        children: [
-                          Row(
-                            crossAxisAlignment: CrossAxisAlignment.end,
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              const SizedBox(
-                                height: 200,
-                              ),
-                              Button(
-                                text: 'open flutter modal',
-                                onPressed: () async {
-                                  controller.animateTo(0.4,
-                                      curve: Curves.decelerate,
-                                      duration:
-                                          const Duration(milliseconds: 400));
-                                },
-                              ),
-                              const SizedBox(
-                                width: 20,
-                              ),
-                              Button(
-                                text: 'dismiss modal',
-                                onPressed: () async {
-                                  controller.animateTo(0.0,
-                                      curve: Curves.decelerate,
-                                      duration:
-                                          const Duration(milliseconds: 400));
-                                },
-                              ),
-                            ],
-                          ),
-                          const SizedBox(
-                            height: 12,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Button(
-                                  text: 'sliding sheet modal',
-                                  onPressed: () {
-                                    sheetController.snapToExtent(0.4);
-                                  })
-                            ],
-                          )
-                        ],
+                      Center(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 200,
+                            ),
+                            Button(
+                              text: 'open flutter modal',
+                              onPressed: () async {
+                                controller.animateTo(0.4,
+                                    curve: Curves.decelerate,
+                                    duration:
+                                        const Duration(milliseconds: 400));
+                              },
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Button(
+                                text: 'sliding sheet modal',
+                                onPressed: () {
+                                  sheetController.snapToExtent(0.4);
+                                })
+                          ],
+                        ),
                       )
                     ],
                   )),
