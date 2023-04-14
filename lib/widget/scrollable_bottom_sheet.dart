@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modal_example/widget/modal_content.dart';
 
 class CustomBottomSheetModal extends StatefulWidget {
   const CustomBottomSheetModal({super.key, required this.controller});
@@ -27,24 +28,7 @@ class _CustomBottomSheetModalState extends State<CustomBottomSheetModal> {
                 topRight: Radius.circular(16),
               ),
             ),
-            child: ListView.builder(
-              controller: scrollController,
-              itemCount: 25,
-              itemBuilder: (BuildContext context, int index) {
-                return Column(
-                  children: [
-                    Container(
-                      height: 30,
-                      color: const Color.fromARGB(255, 10, 34, 75),
-                    ),
-                    Container(
-                      height: 30,
-                      color: Colors.white,
-                    )
-                  ],
-                );
-              },
-            ),
+            child: ModalContent(scrollController: scrollController),
           );
         });
   }
