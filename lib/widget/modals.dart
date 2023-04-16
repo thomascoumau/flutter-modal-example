@@ -46,3 +46,30 @@ class CustomSlidingSheet extends StatelessWidget {
     );
   }
 }
+
+showSlidingModal(context) => showSlidingBottomSheet(
+      context,
+      builder: (context) {
+        return SlidingSheetDialog(
+            elevation: 8,
+            cornerRadius: 16,
+            snapSpec: const SnapSpec(
+              snap: true,
+              snappings: [0.4, 1.0],
+              positioning: SnapPositioning.relativeToAvailableSpace,
+            ),
+            customBuilder: (context, scrollController, state) {
+              return SizedBox(
+                height: 400,
+                child: Center(
+                  child: Material(
+                    child: InkWell(
+                      onTap: () => Navigator.pop(context),
+                      child: ModalContent(scrollController: scrollController),
+                    ),
+                  ),
+                ),
+              );
+            });
+      },
+    );

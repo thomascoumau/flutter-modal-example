@@ -78,7 +78,14 @@ class _HomeState extends State<Home> {
                                   text: 'sliding sheet modal',
                                   onPressed: () {
                                     sheetController.snapToExtent(0.4);
-                                  })
+                                  }),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Button(
+                                text: 'sliding bottom sheet',
+                                onPressed: () => showSlidingModal(context),
+                              )
                             ],
                           ),
                         )
