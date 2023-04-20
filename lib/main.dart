@@ -15,6 +15,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: _title,
       theme: ThemeData(
         primarySwatch: Colors.blue,
@@ -39,64 +40,59 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: GestureDetector(
-        onTap: () async => controller.animateTo(0.0,
-            curve: Curves.easeOutQuad,
-            duration: const Duration(milliseconds: 400)),
-        child: CustomSlidingSheet(
-          sheetController: sheetController,
-          body: Stack(
-            children: [
-              SizedBox.expand(
-                child: ColoredBox(
-                    color: Colors.white,
-                    child: Stack(
-                      children: [
-                        PhotoView(
-                          disableGestures: false,
-                          imageProvider: const AssetImage("assets/Arves.jpg"),
+      body: CustomSlidingSheet(
+        sheetController: sheetController,
+        body: Stack(
+          children: [
+            SizedBox.expand(
+              child: ColoredBox(
+                  color: Colors.white,
+                  child: Stack(
+                    children: [
+                      PhotoView(
+                        disableGestures: false,
+                        imageProvider: const AssetImage("assets/Arves.jpg"),
+                      ),
+                      Center(
+                        child: Column(
+                          children: [
+                            const SizedBox(
+                              height: 200,
+                            ),
+                            Button(
+                              text: 'open flutter modal',
+                              onPressed: () async {
+                                controller.animateTo(0.4,
+                                    curve: Curves.decelerate,
+                                    duration:
+                                        const Duration(milliseconds: 400));
+                              },
+                            ),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Button(
+                                text: 'sliding sheet modal',
+                                onPressed: () {
+                                  sheetController.snapToExtent(0.4);
+                                }),
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Button(
+                              text: 'sliding bottom sheet',
+                              onPressed: () => showSlidingModal(context),
+                            )
+                          ],
                         ),
-                        Center(
-                          child: Column(
-                            children: [
-                              const SizedBox(
-                                height: 200,
-                              ),
-                              Button(
-                                text: 'open flutter modal',
-                                onPressed: () async {
-                                  controller.animateTo(0.4,
-                                      curve: Curves.decelerate,
-                                      duration:
-                                          const Duration(milliseconds: 400));
-                                },
-                              ),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Button(
-                                  text: 'sliding sheet modal',
-                                  onPressed: () {
-                                    sheetController.snapToExtent(0.4);
-                                  }),
-                              const SizedBox(
-                                height: 12,
-                              ),
-                              Button(
-                                text: 'sliding bottom sheet',
-                                onPressed: () => showSlidingModal(context),
-                              )
-                            ],
-                          ),
-                        )
-                      ],
-                    )),
-              ),
-              CustomBottomSheetModal(
-                controller: controller,
-              ),
-            ],
-          ),
+                      )
+                    ],
+                  )),
+            ),
+            CustomBottomSheetModal(
+              controller: controller,
+            ),
+          ],
         ),
       ),
     );
