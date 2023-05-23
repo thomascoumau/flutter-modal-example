@@ -47,46 +47,51 @@ class _HomeState extends State<Home> {
             SizedBox.expand(
               child: ColoredBox(
                   color: Colors.white,
-                  child: Stack(
-                    children: [
-                      PhotoView(
-                        disableGestures: false,
-                        imageProvider: const AssetImage("assets/Arves.jpg"),
-                      ),
-                      Center(
-                        child: Column(
-                          children: [
-                            const SizedBox(
-                              height: 200,
-                            ),
-                            Button(
-                              text: 'open flutter modal',
-                              onPressed: () async {
-                                controller.animateTo(0.4,
-                                    curve: Curves.decelerate,
-                                    duration:
-                                        const Duration(milliseconds: 400));
-                              },
-                            ),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Button(
-                                text: 'sliding sheet modal',
-                                onPressed: () {
-                                  sheetController.snapToExtent(0.4);
-                                }),
-                            const SizedBox(
-                              height: 12,
-                            ),
-                            Button(
-                              text: 'sliding bottom sheet',
-                              onPressed: () => showSlidingModal(context),
-                            )
-                          ],
+                  child: GestureDetector(
+                    onTap: () => controller.animateTo(0,
+                        curve: Curves.decelerate,
+                        duration: const Duration(milliseconds: 400)),
+                    child: Stack(
+                      children: [
+                        PhotoView(
+                          disableGestures: false,
+                          imageProvider: const AssetImage("assets/Arves.jpg"),
                         ),
-                      )
-                    ],
+                        Center(
+                          child: Column(
+                            children: [
+                              const SizedBox(
+                                height: 200,
+                              ),
+                              Button(
+                                text: 'open flutter modal',
+                                onPressed: () async {
+                                  controller.animateTo(0.4,
+                                      curve: Curves.decelerate,
+                                      duration:
+                                          const Duration(milliseconds: 400));
+                                },
+                              ),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Button(
+                                  text: 'sliding sheet modal',
+                                  onPressed: () {
+                                    sheetController.snapToExtent(0.4);
+                                  }),
+                              const SizedBox(
+                                height: 12,
+                              ),
+                              Button(
+                                text: 'sliding bottom sheet',
+                                onPressed: () => showSlidingModal(context),
+                              )
+                            ],
+                          ),
+                        )
+                      ],
+                    ),
                   )),
             ),
             CustomBottomSheetModal(
