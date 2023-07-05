@@ -1,24 +1,54 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modal_example/widget/modal_content.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomBottomSheetModal extends StatefulWidget {
-  const CustomBottomSheetModal({super.key, required this.controller});
+final draggableScrollableSheetControllerProvider =
+    StateProvider.autoDispose<DraggableScrollableController>((ref) {
+  final controller = DraggableScrollableController();
+  void listener() {
+    if (!controller.isAttached) {
+      return;
+    }
+    ref.read(_mapItemModalScrollExtentProvider.notifier).state =
+        controller.size;
+  }
 
-  final DraggableScrollableController controller;
+  controller.addListener(listener);
+  ref.onDispose(() {
+    controller.removeListener(listener);
+    controller.dispose();
+  });
+  return controller;
+});
+
+final mapSizeProvider = StateProvider.autoDispose<double>((ref) => 0.5);
+final _mapItemModalScrollExtentProvider =
+    StateProvider.autoDispose<double>((ref) => 0);
+
+class CustomBottomSheetModal extends ConsumerStatefulWidget {
+  const CustomBottomSheetModal({super.key, required this.snapSize});
+
+  final double snapSize;
   @override
-  State<CustomBottomSheetModal> createState() => _CustomBottomSheetModalState();
+  ConsumerState<CustomBottomSheetModal> createState() =>
+      _CustomBottomSheetModalState();
 }
 
-class _CustomBottomSheetModalState extends State<CustomBottomSheetModal> {
+class _CustomBottomSheetModalState
+    extends ConsumerState<CustomBottomSheetModal> {
   @override
   Widget build(BuildContext context) {
+    final size = ref.watch(mapSizeProvider);
+
+    // add this line to break the code
+    // final scrollExtent = ref.watch(_mapItemModalScrollExtentProvider);
+    final controller = ref.watch(draggableScrollableSheetControllerProvider);
     return DraggableScrollableSheet(
         snap: true,
-        snapSizes: const [0.4],
-        controller: widget.controller,
+        snapSizes: [size],
+        controller: controller,
         minChildSize: 0.0,
         initialChildSize: 0.0,
-        maxChildSize: 1,
         builder: (BuildContext context, ScrollController scrollController) {
           return Container(
             decoration: const BoxDecoration(
